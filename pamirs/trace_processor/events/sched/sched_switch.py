@@ -21,14 +21,17 @@ class SchedSwitch:
 
     def __init__(self, prev_comm, prev_pid, prev_prio,
                  prev_state, next_comm, next_pid, next_prio):
-        self.prev_pid = int(prev_pid)
+        self.prev_comm = prev_comm.strip()
+        self.prev_tid = int(prev_pid)
         self.prev_prio = int(prev_prio)
-        self.next_pid = int(next_pid)
+        self.prev_state = prev_state
+        self.next_comm = next_comm.strip()
+        self.next_tid = int(next_pid)
         self.next_prio = int(next_prio)
 
     def __repr__(self):
         return "SchedSwitch(prev_pid={} prev_prio={} ===> next_pid={} next_prio={})".format(
-            self.prev_pid, self.prev_prio, self.next_pid, self.next_prio
+            self.prev_tid, self.prev_prio, self.next_tid, self.next_prio
         )
 
 

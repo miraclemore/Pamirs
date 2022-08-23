@@ -17,7 +17,7 @@ sched_wakeup_pattern = re.compile(
 
 class SchedWakeup:
     def __init__(self, comm, pid, prio, target_cpu):
-        self.comm = comm
+        self.comm = comm.strip()
         self.tid = int(pid)
         self.prio = int(prio)
         self.target_cpu = int(target_cpu)

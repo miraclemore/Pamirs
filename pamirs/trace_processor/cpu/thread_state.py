@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 class ThreadState:
-    def __init__(self, state, io_wait, blocked_func,
+    def __init__(self, state, io_wait=None, blocked_func=None,
                  wakee_name=None, wakee_tid=None, wakee_cpu=None):
         self.state = state
         self.io_wait = io_wait

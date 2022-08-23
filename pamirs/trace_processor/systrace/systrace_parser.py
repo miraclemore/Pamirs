@@ -28,7 +28,7 @@ class SystraceParser:
         (?P<irq_type>[H|h|s|.]) # hardirq/softirq
         (?P<preempt_depth>[0-9|.]) # preempt-depth
         \s+
-        (?P<timestamp>\d+\W{1}\d+)
+        (?P<raw_timestamp>\d+\W{1}\d+)
         \W{1}\s+ 
         (?P<tracepoint>\w+) # tracepoint
         \W{1}\s+
@@ -39,12 +39,19 @@ class SystraceParser:
     )
 
     def __init__(self):
-        pass
+        self.ts_raw_start = 0
+        self.ts_raw_end = 0
+        self.ts_dur = 0
 
     def systrace_parse_line(self, line):
         matched = re.match(self._TRACE_LINE_PATTERN, line)
         if matched:
             mgd = matched.groupdict()
+
+            mgd['raw_timestamp'] = int(float(mgd['raw_timestamp']) * 1000000)
+            if self.ts_raw_start == 0:
+                self.ts_raw_start = mgd['raw_timestamp']
+            mgd['timestamp'] = mgd['raw_timestamp'] - self.ts_raw_start
 
             if mgd['tracepoint'] == "tracing_mark_write":
                 self.systrace_parse_print_event(mgd['data'])
