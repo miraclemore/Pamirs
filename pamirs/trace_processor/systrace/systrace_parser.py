@@ -3,12 +3,16 @@
 import re
 
 from pamirs.trace_processor.events.event import Event
+from pamirs.trace_processor.events.power.cpu_frequency import cpu_frequency
+from pamirs.trace_processor.events.power.cpuidle import cpu_idle
 from pamirs.trace_processor.events.sched.sched_switch import sched_switch
 from pamirs.trace_processor.events.sched.sched_wakeup import sched_wakeup
 
 ftrace_handler_dict = {
     "sched_switch": sched_switch,
-    "sched_wakeup": sched_wakeup
+    "sched_wakeup": sched_wakeup,
+    "cpu_idle": cpu_idle,
+    "cpu_frequency": cpu_frequency
 }
 
 
