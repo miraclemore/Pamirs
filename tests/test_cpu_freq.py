@@ -6,3 +6,6 @@ from pamirs.trace_processor.trace_processor import TraceProcessor
 tp = TraceProcessor("/work/logs/example_android_trace_15s.systrace")
 
 cpu = CPU(tp)
+
+for _slice in cpu._freq_slices[2]:
+    print(_slice)

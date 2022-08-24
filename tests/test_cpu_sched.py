@@ -1,15 +1,14 @@
 # !/usr/bin/python3
 # -*- coding: utf-8 -*-
-
 from pamirs.trace_processor.cpu.cpu import CPU
+from pamirs.trace_processor.cpu.thread_info import ThreadInfo
 from pamirs.trace_processor.trace_processor import TraceProcessor
 
 tp = TraceProcessor("/work/logs/example_android_trace_15s.systrace")
 
-# tp.dump_events()
+cpu = CPU(tp)
 
-for event in tp.events_list:
-    if event.tracepoint == "cpu_frequency":
-        print(event)
+sf = ThreadInfo("surfaceflinger", 640, 640)
 
-# cpu = CPU(tp)
+for _slice in cpu._thread_slices[sf]:
+    print(_slice)

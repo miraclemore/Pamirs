@@ -2,11 +2,16 @@
 # -*- coding: utf-8 -*-
 
 
-class WakeeInfo:
-    def __init__(self, wakee_name, wakee_tid, wakee_cpu):
-        self.wakee_name = wakee_name
-        self.wakee_tid = wakee_tid
-        self.wakee_cpu = wakee_cpu
+class WakerInfo:
+    def __init__(self, waker_name, waker_tid, waker_cpu):
+        self.waker_name = waker_name
+        self.waker_tid = waker_tid
+        self.waker_cpu = waker_cpu
+
+    def __repr__(self):
+        return "Waker({}-{} on cpu{})".format(
+            self.waker_name, self.waker_tid, self.waker_cpu
+        )
 
 
 class SleepInfo:
@@ -27,9 +32,9 @@ class SchedSlice:
             self.blocked_func = sleep_info.blocked_func
 
         if wakee_info:
-            self.wakee_name = wakee_info.wakee_name
-            self.wakee_tid = wakee_info.wakee_tid
-            self.wakee_cpu = wakee_info.wakee_cpu
+            self.waker_name = wakee_info.waker_name
+            self.waker_tid = wakee_info.waker_tid
+            self.waker_cpu = wakee_info.waker_cpu
 
     def __repr__(self):
         return "SchedSclice({} {} state={} slice={})".format(
